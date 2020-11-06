@@ -10,9 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "CollideArea",
+"language": "GDScript",
+"path": "res://Scenes/CollideArea.gd"
+}, {
+"base": "Area2D",
 "class": "DeathArea",
 "language": "GDScript",
 "path": "res://Scenes/DeathArea.gd"
+}, {
+"base": "Area2D",
+"class": "PhaseArea",
+"language": "GDScript",
+"path": "res://PhaseArea.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PhaseMouse",
+"language": "GDScript",
+"path": "res://PhaseMouse.gd"
 }, {
 "base": "Area2D",
 "class": "Player",
@@ -25,7 +40,10 @@ _global_script_classes=[ {
 "path": "res://Scenes/WinArea.gd"
 } ]
 _global_script_class_icons={
+"CollideArea": "",
 "DeathArea": "",
+"PhaseArea": "",
+"PhaseMouse": "",
 "Player": "",
 "WinArea": ""
 }
@@ -33,12 +51,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Midterm-project-igniseros"
-run/main_scene="res://Test.tscn"
+run/main_scene="res://Levels/Level_1.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
 [autoload]
 
 GameEvents="*res://GameEvents.gd"
+LevelManager="*res://levelManager.gd"
+PlayerPos="*res://player_pos.gd"
 
 [display]
 
@@ -60,6 +81,15 @@ phase={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Win/Death"
+2d_physics/layer_3="PhaseMouse"
+2d_physics/layer_4="CollisionZone"
+2d_physics/layer_5="Enemies"
+
 [rendering]
 
+environment/default_clear_color=Color( 0.0705882, 0.0666667, 0.0627451, 1 )
 environment/default_environment="res://default_env.tres"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/RayCast2D.gd" type="Script" id=1]
+
+[node name="EnemyRay" type="RayCast2D"]
+enabled = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 9
+collide_with_areas = true
+script = ExtResource( 1 )

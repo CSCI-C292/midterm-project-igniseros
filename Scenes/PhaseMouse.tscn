@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://PhaseTimer.gd" type="Script" id=1]
+[ext_resource path="res://PhaseMouse.gd" type="Script" id=2]
+[ext_resource path="res://PhaseSprite.gd" type="Script" id=3]
+[ext_resource path="res://PhaseRay.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Light/light.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Light/ring.png" type="Texture" id=6]
+[ext_resource path="res://mouse_shader.shader" type="Shader" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.0
+height = 1.91287
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/Itch release raw tileset 01.png-625ce2262371175d60fde44f1572b82f.stex"
+
+[node name="PhaseMouse" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource( 2 )
+RAY = NodePath("Ray")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0.133333, 0.129412, 0.596078, 0.160784 )
+material = SubResource( 2 )
+scale = Vector2( 3, 3 )
+texture = SubResource( 3 )
+region_enabled = true
+region_rect = Rect2( 56, 56, 8, 8 )
+script = ExtResource( 3 )
+
+[node name="PhaseTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource( 1 )
+
+[node name="Ray" type="RayCast2D" parent="."]
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 128, 0 )
+collision_mask = 4
+script = ExtResource( 4 )
+
+[node name="Ring" type="Light2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
+
+[node name="Light" type="Light2D" parent="."]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+[connection signal="timeout" from="PhaseTimer" to="." method="_on_PhaseTimer_timeout"]

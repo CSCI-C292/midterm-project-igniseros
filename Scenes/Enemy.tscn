@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://player_shader.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/Tilesets/Itch release raw tileset 01.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/EnemyRay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Enemy.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/DeathArea.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 72, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 56, 72, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 8.0
+
+[node name="Enemy" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 35.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="EnemyRay" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="DeathArea" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+shape = SubResource( 6 )

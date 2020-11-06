@@ -3,5 +3,7 @@
 [ext_resource path="res://Scenes/WinArea.gd" type="Script" id=1]
 
 [node name="WinArea" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 1 )
 [connection signal="area_entered" from="." to="." method="_on_WinArea_area_entered"]
