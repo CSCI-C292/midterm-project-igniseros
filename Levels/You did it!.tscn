@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="You did it!" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 160.0
+margin_top = 136.0
+margin_right = 233.0
+margin_bottom = 167.0
+rect_scale = Vector2( 10, 10 )
+text = "YOU DID IT
+YOU WIN!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
