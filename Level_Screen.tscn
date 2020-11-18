@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Fonts/Angeline_Dynamic.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Increment.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/MenuFilter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Menu_Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Level_Script.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://LevelData.tres" type="Resource" id=8]
+[ext_resource path="res://Enter.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 128
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+export(String) var path 
+
+func _ready():
+	connect(\"pressed\",self,\"_on_Play_pressed\")
+
+func _on_Play_pressed():
+	LevelManager.change_scene(load(path).instance())
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="CanvasLayer2" parent="." instance=ExtResource( 4 )]
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -42.5
+margin_top = -207.0
+margin_right = 42.5
+margin_bottom = 516.0
+custom_fonts/font = SubResource( 1 )
+text = "01
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Increment" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 62.0
+margin_top = -93.0
+margin_right = 96.0
+margin_bottom = 93.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
+text = ">>"
+flat = true
+script = ExtResource( 3 )
+label = NodePath("../Label")
+LevelData = ExtResource( 8 )
+
+[node name="Decrement" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -93.0
+margin_top = -93.0
+margin_right = -59.0
+margin_bottom = 93.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "<<"
+flat = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+label = NodePath("../Label")
+LevelData = ExtResource( 8 )
+amount = -1
+
+[node name="Enter" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -19.0
+margin_right = 67.0
+margin_bottom = 167.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "Enter"
+flat = true
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+LevelData = ExtResource( 8 )
+label = NodePath("../Label")
+
+[node name="Back" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 42.0
+margin_top = -186.0
+margin_right = 175.0
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://Menu.tscn"

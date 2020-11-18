@@ -22,7 +22,7 @@ func _physics_process(delta):
 		$ColorRect.set_rotation(lock_angle)
 	
 	if(is_sprinting):
-		move_and_collide(speed * Vector2(cos(lock_angle), sin(lock_angle)))
+		move_and_collide(speed * Vector2(cos(lock_angle), sin(lock_angle)).normalized())
 
 
 func _on_SprintTimer_timeout():
