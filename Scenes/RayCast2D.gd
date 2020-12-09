@@ -5,6 +5,7 @@ var player_pos = Vector2(0,0)
 func _ready():
 	add_exception(get_parent())
 	GameEvents.connect("Phased", self, "_on_Phased")
+	player_pos = PlayerPos.get_pos()
 
 func _process(delta):
 	look_at(player_pos)

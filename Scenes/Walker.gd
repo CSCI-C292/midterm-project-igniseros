@@ -26,6 +26,7 @@ func _physics_process(delta):
 
 
 func _on_SprintTimer_timeout():
+	$SprintStreamPlayer.play()
 	starting_pos = position
 	is_sprinting = true
 	$ColorRect.visible = false

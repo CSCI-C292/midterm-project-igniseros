@@ -9,6 +9,9 @@ func _physics_process(delta):
 	if($EnemyRay.get_collider() is Player):
 		move_and_slide((global_position - \
 			$EnemyRay.get_collider().global_position).normalized() * -speed)
+		if( not $FlyingAudio.playing) : $FlyingAudio.play()
+	else:
+		$FlyingAudio.stop()
 
 func _on_Player_Died():
 	position = Vector2(0,0)

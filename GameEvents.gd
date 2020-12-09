@@ -11,3 +11,5 @@ signal Mouse_Entered_Win_Area
 signal Mouse_Exited_Win_Area
 signal Mouse_Entered_Death_Area
 signal Mouse_Exited_Death_Area
+
+signal Unpaused

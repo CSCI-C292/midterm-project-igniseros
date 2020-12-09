@@ -14,6 +14,7 @@
 script = ExtResource( 8 )
 
 [node name="TileMap" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -393179, 0, 0, -327642, 0, 0, -327641, 0, 0, 524351, 0, 0, 589888, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 

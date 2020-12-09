@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/TextZone.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 48, 48 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+extra_spacing_bottom = -30
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="TextZone" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 100.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.137255, 0.243137, 0.180392, 1 )
+text = "sample text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Appear = SubResource( 3 )
+[connection signal="area_entered" from="." to="." method="_on_TextZone_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_TextZone_area_exited"]

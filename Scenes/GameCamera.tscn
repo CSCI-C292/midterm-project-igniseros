@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Label.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/B&W.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 //Glitch Controls
@@ -42,7 +44,28 @@ void fragment(){
 custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+render_priority = 2
+shader = SubResource( 3 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+
+void fragment(){
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) / 3f;
+	avg -= .1;
+	COLOR.rgb = vec3(avg,avg,avg);
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=5]
+render_priority = 1
+shader = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+font_data = ExtResource( 3 )
 
 [node name="GameCamera" type="Camera2D"]
 anchor_mode = 0
@@ -60,6 +83,32 @@ margin_right = -11.3265
 margin_bottom = 0.943848
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="B&W" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0.54902 )
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/B&W"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.0
+margin_top = -6.75586
+margin_right = 53.0
+margin_bottom = 129.244
+custom_fonts/font = SubResource( 6 )
+text = "'Space'"
+__meta__ = {
 "_edit_use_anchors_": false
 }
 

@@ -37,6 +37,7 @@ func figure_phase_pos(delta):
 		global_position = move_to
 
 func _on_PhaseTimer_timeout():
+	$PhaseSound.play()
 	phase()
 
 func phase():
@@ -50,13 +51,13 @@ func _on_Mouse_Exited_Collide_Area():
 	in_collide_area = false
 
 func _on_Mouse_Entered_Death_Area():
-#	$Sprite2.modulate.r += .8
-#	$Sprite2.modulate.a += .8
+#	$Sprite2.modulate.r += .5
+#	$Sprite2.modulate.a += .5
 	in_death_area = true
 
 func _on_Mouse_Exited_Death_Area():
-#	$Sprite2.modulate.r-= .8
-#	$Sprite2.modulate.a -= .8
+#	$Sprite2.modulate.r -= .5
+#	$Sprite2.modulate.a -= .5
 	in_death_area = false
 
 func _on_Mouse_Entered_Win_Area():

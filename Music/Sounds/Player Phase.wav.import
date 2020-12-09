@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Player Phase.wav-f8411c7470d1de921808d263abf4e42a.sample"
+
+[deps]
+
+source_file="res://Music/Sounds/Player Phase.wav"
+dest_files=[ "res://.import/Player Phase.wav-f8411c7470d1de921808d263abf4e42a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

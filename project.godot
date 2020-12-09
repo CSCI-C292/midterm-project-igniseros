@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://LevelResource.gd"
 }, {
+"base": "Resource",
+"class": "MusicHolder",
+"language": "GDScript",
+"path": "res://music_holder.gd"
+}, {
 "base": "Area2D",
 "class": "PhaseArea",
 "language": "GDScript",
@@ -48,6 +53,7 @@ _global_script_class_icons={
 "CollideArea": "",
 "DeathArea": "",
 "LevelResource": "",
+"MusicHolder": "",
 "PhaseArea": "",
 "PhaseMouse": "",
 "Player": "",
@@ -61,11 +67,17 @@ run/main_scene="res://Menu.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [autoload]
 
 GameEvents="*res://GameEvents.gd"
 LevelManager="*res://levelManager.gd"
 PlayerPos="*res://player_pos.gd"
+Music="*res://music.gd"
+Saves="*res://Saves.gd"
 
 [display]
 

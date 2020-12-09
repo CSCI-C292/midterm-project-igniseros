@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/MenuFilter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menu_Background.tscn" type="PackedScene" id=2]
@@ -6,20 +6,70 @@
 [ext_resource path="res://Assets/Fonts/Angeline_Dynamic.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Level_Screen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://PlayButton.gd" type="Script" id=6]
-[ext_resource path="res://Levels/Level_1.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Level_Script.gd" type="Script" id=8]
+[ext_resource path="res://LevelData.tres" type="Resource" id=7]
+[ext_resource path="res://Music/Holders/menu.tres" type="Resource" id=8]
+[ext_resource path="res://quit.gd" type="Script" id=9]
+[ext_resource path="res://Music/Holders/levels.tres" type="Resource" id=10]
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Clear.gd" type="Script" id=12]
+[ext_resource path="res://Music/Sounds/Button Click.wav" type="AudioStream" id=13]
+[ext_resource path="res://SaveButton.gd" type="Script" id=14]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export(Resource) var starting_music
+
+func _ready():
+	LevelManager.current_level = self
+	if(not Music.playing):
+		Music.set_song_list(starting_music)
+	
+"
+
+[sub_resource type="DynamicFont" id=2]
 size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+export(PackedScene) onready var level_1
+export(Resource) var button_sound
+
+func _ready():
+	connect(\"pressed\",self,\"_on_Play_pressed\")
+
+func _on_Play_pressed():
+	LevelManager.change_scene(level_1.instance())
+	Music.play_effect(button_sound, -10)
+	
+	
+"
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
 font_data = ExtResource( 3 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 8 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+starting_music = ExtResource( 8 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 2 )]
 
@@ -42,7 +92,7 @@ margin_top = 229.0
 margin_right = 823.0
 margin_bottom = 325.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 enabled_focus_mode = 0
 text = "Play"
 flat = true
@@ -50,7 +100,9 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-level_1 = ExtResource( 7 )
+LevelData = ExtResource( 7 )
+level_music = ExtResource( 10 )
+button_sound = ExtResource( 13 )
 
 [node name="Levels" type="Button" parent="."]
 margin_left = 756.0
@@ -58,15 +110,16 @@ margin_top = 325.0
 margin_right = 823.0
 margin_bottom = 421.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 enabled_focus_mode = 0
 text = "levels"
 flat = true
-script = ExtResource( 6 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 level_1 = ExtResource( 5 )
+button_sound = ExtResource( 13 )
 
 [node name="quit" type="Button" parent="."]
 margin_left = 756.0
@@ -74,7 +127,76 @@ margin_top = 421.0
 margin_right = 830.0
 margin_bottom = 517.0
 focus_mode = 0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 enabled_focus_mode = 0
 text = "quit"
 flat = true
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clear" type="Button" parent="."]
+margin_left = 56.0
+margin_top = 517.0
+margin_right = 166.0
+margin_bottom = 569.0
+focus_mode = 0
+custom_fonts/font = SubResource( 4 )
+text = "Clear Save Data"
+flat = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+button_sound = ExtResource( 13 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+buttons = [ NodePath("Save1"), NodePath("Save2"), NodePath("Save3") ]
+
+[node name="Save1" type="Button" parent="Control"]
+margin_left = 84.0
+margin_top = 45.0
+margin_right = 152.0
+margin_bottom = 119.0
+focus_mode = 0
+custom_fonts/font = SubResource( 5 )
+text = "Save 1"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save2" type="Button" parent="Control"]
+margin_left = 84.0
+margin_top = 105.0
+margin_right = 156.0
+margin_bottom = 179.0
+focus_mode = 0
+custom_fonts/font = SubResource( 6 )
+text = "Save 2"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save3" type="Button" parent="Control"]
+margin_left = 84.0
+margin_top = 168.0
+margin_right = 156.0
+margin_bottom = 242.0
+focus_mode = 0
+custom_fonts/font = SubResource( 7 )
+text = "Save 3"
+flat = true
+[connection signal="pressed" from="quit" to="quit" method="_on_quit_pressed"]
+[connection signal="pressed" from="Clear" to="Clear" method="_on_Clear_pressed"]
+[connection signal="pressed" from="Control/Save1" to="Control" method="_on_Save1_pressed"]
+[connection signal="pressed" from="Control/Save2" to="Control" method="_on_Save2_pressed"]
+[connection signal="pressed" from="Control/Save3" to="Control" method="_on_Save3_pressed"]

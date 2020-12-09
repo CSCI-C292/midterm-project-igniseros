@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://PhaseTimer.gd" type="Script" id=1]
 [ext_resource path="res://PhaseMouse.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Light/light.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Light/ring.png" type="Texture" id=6]
 [ext_resource path="res://mouse_shader.shader" type="Shader" id=7]
+[ext_resource path="res://Music/Sounds/Player Phase.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -54,4 +55,8 @@ texture = ExtResource( 6 )
 [node name="Light" type="Light2D" parent="."]
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
+
+[node name="PhaseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -5.0
 [connection signal="timeout" from="PhaseTimer" to="." method="_on_PhaseTimer_timeout"]

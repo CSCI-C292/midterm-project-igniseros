@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player_shader.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/Tilesets/Itch release raw tileset 01.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/EnemyRay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Walker.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/DeathArea.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Music/Sounds/Charger Charging.wav" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.0
@@ -38,13 +39,13 @@ script = ExtResource( 4 )
 speed = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 5 )
-frame = 1
 speed_scale = 0.25
 playing = true
 
@@ -65,8 +66,13 @@ one_shot = true
 one_shot = true
 
 [node name="DeathArea" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 shape = SubResource( 6 )
+
+[node name="SprintStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
 [connection signal="timeout" from="SprintTimer" to="." method="_on_SprintTimer_timeout"]
 [connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Fonts/Angeline_Dynamic.tres" type="DynamicFont" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://LevelData.tres" type="Resource" id=8]
 [ext_resource path="res://Enter.gd" type="Script" id=9]
+[ext_resource path="res://Music/Holders/levels.tres" type="Resource" id=10]
+[ext_resource path="res://Music/Sounds/Button Click.wav" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -22,12 +24,14 @@ font_data = ExtResource( 1 )
 script/source = "extends Button
 
 export(String) var path 
+export(Resource) var button_sound
 
 func _ready():
 	connect(\"pressed\",self,\"_on_Play_pressed\")
 
 func _on_Play_pressed():
 	LevelManager.change_scene(load(path).instance())
+	Music.play_effect(button_sound, -10)
 "
 
 [node name="Control" type="Control"]
@@ -37,6 +41,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Level = -1
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 5 )]
 
@@ -73,8 +78,12 @@ enabled_focus_mode = 0
 text = ">>"
 flat = true
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 label = NodePath("../Label")
 LevelData = ExtResource( 8 )
+button_sound = ExtResource( 11 )
 
 [node name="Decrement" type="Button" parent="."]
 anchor_left = 0.5
@@ -97,6 +106,7 @@ __meta__ = {
 label = NodePath("../Label")
 LevelData = ExtResource( 8 )
 amount = -1
+button_sound = ExtResource( 11 )
 
 [node name="Enter" type="Button" parent="."]
 anchor_left = 0.5
@@ -118,6 +128,8 @@ __meta__ = {
 }
 LevelData = ExtResource( 8 )
 label = NodePath("../Label")
+level_music = ExtResource( 10 )
+button_sound = ExtResource( 11 )
 
 [node name="Back" type="Button" parent="."]
 anchor_top = 1.0
@@ -135,3 +147,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 path = "res://Menu.tscn"
+button_sound = ExtResource( 11 )
