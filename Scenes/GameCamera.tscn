@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Label.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/B&W.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Fonts/Angeline Vintage_Demo.otf" type="DynamicFontData" id=4]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -47,6 +47,10 @@ custom_defines = ""
 render_priority = 2
 shader = SubResource( 3 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 4 )
+
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
@@ -86,6 +90,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2" type="Label" parent="CanvasLayer/ColorRect"]
+modulate = Color( 1, 1, 1, 0.505882 )
+margin_left = 24.3407
+margin_top = -11.5486
+margin_right = 64.3407
+margin_bottom = 56.4514
+custom_fonts/font = SubResource( 7 )
+text = "'Esc'"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="B&W" type="ColorRect" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0.54902 )
 material = SubResource( 5 )
@@ -108,14 +124,6 @@ margin_right = 53.0
 margin_bottom = 129.244
 custom_fonts/font = SubResource( 6 )
 text = "'Space'"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 14.0
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
