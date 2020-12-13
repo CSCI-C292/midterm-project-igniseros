@@ -54,6 +54,7 @@ polygon = PoolVector2Array( 720, 384, 1536, 384, 1536, 48, 1032, 48, 1032, -48, 
 polygon = PoolVector2Array( 720, -384, 720, -48, 768, -48, 768, 0, 816, 0, 816, 48, 864, 48, 864, -24, 960, -24, 960, -48, 1344, -48, 1344, 48, 1536, 48, 1536, -384 )
 
 [node name="CollideArea" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollideArea"]
 polygon = PoolVector2Array( -528, -312, -528, 336, 456, 336, 456, 144, 696, 144, 696, 48, 360, 48, 360, 144, -240, 144, -240, -144, 360, -144, 360, -48, 696, -48, 696, -144, 456, -144, 456, -312 )
